@@ -25,10 +25,10 @@ action=$1
 # +---------------------------------------------------+
 # Variables
 # +---------------------------------------------------+
-version="3.0.0.9"
+version="3.0.0.8"
 gitbranch="master"
 logdir="/var/log/EFA"
-gitdlurl="https://raw.githubusercontent.com/E-F-A/v3/$gitbranch/build"
+gitdlurl="https://raw.githubusercontent.com/E-F-A/v3/$version/build"
 password="EfaPr0j3ct"
 mirror="http://dl.efa-project.org"
 mirrorpath="/build/$version"
