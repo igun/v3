@@ -1,6 +1,6 @@
 #!/bin/bash
 # +--------------------------------------------------------------------+
-# EFA 3.0.0.8 build without ks version 20150517
+# EFA 3.0.0.9 build without ks version 20160125
 #
 # Purpose:
 #		This script will 'baseline' an existing CentOS installation
@@ -47,13 +47,13 @@ fi
 #----------------------------------------------------------------#
 CENTOS=`cat /etc/centos-release`
 
-if [[ "$CENTOS" == "CentOS release 6.6 (Final)" ]]
+if [[ "$CENTOS" == "CentOS release 6.7 (Final)" ]]
   then
-    echo "Good you are running CentOS 6.6 x64"
+    echo "Good you are running CentOS 6.7 x64"
 else
-  echo "You are not running CentOS 6.6"
+  echo "You are not running CentOS 6.7"
   echo "Unsupported system, stopping now"
-  echo "If you are running CentOS 6.5 please do a manual upgrade to 6.6 before starting this build"
+  echo "If you are running CentOS 6.6 please do a manual upgrade to 6.7 before starting this build"
   exit 1
 fi
 #----------------------------------------------------------------#
@@ -110,6 +110,7 @@ cat > /etc/sysconfig/iptables << 'EOF'
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 80 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 22 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 25 -j ACCEPT
+-A INPUT -m state --state NEW -m tcp -p tcp --dport 587 -j ACCEPT
 -A INPUT -m state --state NEW -m tcp -p tcp --dport 10000 -j ACCEPT
 -A INPUT -j REJECT --reject-with icmp-host-prohibited
 -A FORWARD -j REJECT --reject-with icmp-host-prohibited
@@ -223,7 +224,9 @@ alsa-lib
 #----------------------------------------------------------------#
 mkdir /var/log/EFA
 mkdir /usr/src/EFA
-/usr/bin/wget -q -O /usr/src/EFA/build.bash -o /var/log/EFA/wget.log https://raw.githubusercontent.com/E-F-A/v3/3.0.0.8/build/build.bash --no-check-certificate
+#/usr/bin/wget -q -O /usr/src/EFA/build.bash -o /var/log/EFA/wget.log https://raw.githubusercontent.com/E-F-A/v3/3.0.0.8/build/build.bash --no-check-certificate
+#chmod 700 /usr/src/EFA/build.bash
+/usr/bin/wget -q -O /usr/src/EFA/build.bash -o /var/log/EFA/wget.log https://raw.githubusercontent.com/igun/v3/master/build/build.bash --no-check-certificate
 chmod 700 /usr/src/EFA/build.bash
 #----------------------------------------------------------------#
 
