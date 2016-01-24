@@ -26,8 +26,9 @@ action=$1
 # Variables
 # +---------------------------------------------------+
 version="3.0.0.9"
+gitbranch="master"
 logdir="/var/log/EFA"
-gitdlurl="https://raw.githubusercontent.com/E-F-A/v3/$version/build"
+gitdlurl="https://raw.githubusercontent.com/E-F-A/v3/$gitbranch/build"
 password="EfaPr0j3ct"
 mirror="http://dl.efa-project.org"
 mirrorpath="/build/$version"
@@ -557,7 +558,7 @@ func_apache () {
 
     # Issue #139 SSLv3 POODLE Vulnerability
     sed -i "/^SSLProtocol/ c\SSLProtocol all -SSLv2 -SSLv3" /etc/httpd/conf.d/ssl.conf
-    
+
     # Issue #179 default https
     sed -i '/^#Listen 443/ c\Listen 443' /etc/httpd/conf.d/ssl.conf
     echo -e "RewriteEngine On" > /etc/httpd/conf.d/redirectssl.conf
@@ -1341,7 +1342,7 @@ func_cleanup () {
 
     # clean yum cache
     yum clean all
-    
+
     # Issue #96 Reconfigure to permit yum update
     echo "exclude=$yumexclude" >> /etc/yum.conf
 
